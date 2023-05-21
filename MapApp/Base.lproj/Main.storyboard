@@ -51,17 +51,17 @@
             </objects>
             <point key="canvasLocation" x="747" y="1258"/>
         </scene>
-        <!--Item-->
+        <!--POST-->
         <scene sceneID="wwy-Po-akD">
             <objects>
-                <viewController id="3cO-yY-hwY" sceneMemberID="viewController">
+                <viewController id="3cO-yY-hwY" customClass="presentPickerViewController" customModule="MapApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U81-0l-soZ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="lOx-Ss-utV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="UK1-Tv-Z7X"/>
+                    <tabBarItem key="tabBarItem" title="POST" image="camera" catalog="system" id="UK1-Tv-Z7X"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oub-QF-9xJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -70,7 +70,7 @@
         <!--QUEST-->
         <scene sceneID="YLI-jO-sUT">
             <objects>
-                <viewController id="7x0-gp-d7P" sceneMemberID="viewController">
+                <viewController id="7x0-gp-d7P" customClass="QuestViewController" customModule="MapApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YWo-y9-41B">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="769"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -106,6 +106,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="camera" catalog="system" width="128" height="93"/>
         <image name="folder" catalog="system" width="128" height="96"/>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="list.bullet.clipboard" catalog="system" width="103" height="128"/>
