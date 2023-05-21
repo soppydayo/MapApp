@@ -4,7 +4,7 @@ import MapKit
 import CoreLocation
 
 // CLLocationManagerDelegateを継承する
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class HomeViewController: UIViewController, CLLocationManagerDelegate {
     // storyboardから接続する
     @IBOutlet weak var mapView: MKMapView!
     // locationManagerを宣言する
@@ -21,11 +21,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // 0.01が距離の倍率
         let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
         // mapView.userLocation.coordinateで現在地の情報が取得できる
-        let region = MKCoordinateRegion(center: mapView.userLocation.coordinate, span: span)
+        let region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: span)
         // ここで照準を合わせている
         mapView.region = region
     }
-}
+    
     
     // 許可を求めるためのdelegateメソッド
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -47,4 +47,5 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             break
         }
     }
+}
 
