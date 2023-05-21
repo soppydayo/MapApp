@@ -287,8 +287,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NG4N5MCHWS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MapApp/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "このアプリは位置情報を取得します";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "このアプリは位置情報を取得します";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -314,8 +317,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = NG4N5MCHWS;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MapApp/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "このアプリは位置情報を取得します";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "このアプリは位置情報を取得します";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
