@@ -29,8 +29,18 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
             picker.sourceType = sourceType
             picker.delegate = self
             self.present(picker, animated: true, completion: nil)
+            
+            
         }
+        
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        self.dismiss(animated: true, completion: nil)
+        
+        photoImageView.image = info[.originalImage] as? UIImage
+    }
+
     
     
     
