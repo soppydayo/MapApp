@@ -3,49 +3,33 @@ import UIKit
 import MapKit
 import CoreLocation
 
-// CLLocationManagerDelegateを継承する
 class HomeViewController: UIViewController, CLLocationManagerDelegate {
-    // storyboardから接続する
     @IBOutlet weak var mapView: MKMapView!
-    // locationManagerを宣言する
     var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // ロケーションマネージャーのセットアップ
         locationManager = CLLocationManager()
         locationManager.delegate = self
-        locationManager!.requestWhenInUseAuthorization()
-        
-        // 現在地に照準を合わす
-        // 0.01が距離の倍率
-        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        // mapView.userLocation.coordinateで現在地の情報が取得できる
-        let region = MKCoordinateRegion(center: locationManager.location!.coordinate, span: span)
-        // ここで照準を合わせている
-        mapView.region = region
+        locationManager.requestWhenInUseAuthorization()
     }
     
-    
-    // 許可を求めるためのdelegateメソッド
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
-            // 許可されてない場合
-        case .notDetermined:
-            // 許可を求める
-            manager.requestWhenInUseAuthorization()
-            // 拒否されてる場合
-        case .restricted, .denied:
-            // 何もしない
-            break
-            // 許可されている場合
         case .authorizedAlways, .authorizedWhenInUse:
-            // 現在地の取得を開始
             manager.startUpdatingLocation()
-            break
         default:
             break
         }
     }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            let region = MKCoordinateRegion(center: location.coordinate, span: span)
+            mapView.region = region
+        }
+    }
 }
+
 
