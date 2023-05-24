@@ -8,9 +8,11 @@
 import Foundation
 import RealmSwift
 
-class Savedata: Object {
+class PostData: Object {
     
-    @objc dynamic var title: String = ""
-    @objc dynamic var text: String = ""
+    @Persisted var title: String = ""
+    @Persisted var text: String = ""
+    @Persisted var date: Date = Date()
+    
   
 }

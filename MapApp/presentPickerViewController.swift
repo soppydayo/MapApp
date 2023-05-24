@@ -24,17 +24,19 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         TitleText.delegate = self
         HonbunText.delegate = self
         
-        let savedata: Savedata? = read()
+
         
-        TitleText.text = savedata?.title
-        HonbunText.text = savedata?.text
+        let postdata: PostData? = read()
+        
+        TitleText.text = postdata?.title
+        HonbunText.text = postdata?.text
         
         
         // Do any additional setup after loading the view.
     }
     
-    func read() -> Savedata? {
-        return realm.objects(Savedata.self).first
+    func read() -> PostData? {
+        return realm.objects(PostData.self).first
     }
     
     //Realm
@@ -42,20 +44,23 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         let title: String = TitleText.text!
         let text: String = HonbunText.text!
         
-        let savedata: Savedata? = read()
+        let postdata: PostData? = read()
+        let currentDate = Date() // 現在の年月日を取得
         
-        if savedata != nil {
+        if postdata != nil {
             try! realm.write {
-                savedata!.title = title
-                savedata!.text = text
+                postdata!.title = title
+                postdata!.text = text
+                postdata!.date = currentDate // 現在の年月日を保存
             }
         } else {
-            let newSavedata = Savedata()
-            newSavedata.title = title
-            newSavedata.text = text
+            let newpostdata = PostData()
+            newpostdata.title = title
+            newpostdata.text = text
+            newpostdata.date = currentDate // 現在の年月日を保存
             
             try! realm.write {
-                realm.add(newSavedata)
+                realm.add(newpostdata)
             }
             
         }
