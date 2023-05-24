@@ -28,6 +28,8 @@ class IndexViewController: UIViewController, UITableViewDataSource {
     override func viewWillAppear(_ animated: Bool) {
         items = readItems()
         tableView.reloadData()
+        
+        tableView.rowHeight = 170
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
