@@ -25,10 +25,11 @@ class ItemTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setCell(title:String, date:String) {
+    func setCell(title: String, date: String, image: UIImage?) {
         titleLabel.text = title
-        dateLabel.text = String(date)
-        
+        dateLabel.text = date
+        postImageView.image = image
     }
+
     
 }

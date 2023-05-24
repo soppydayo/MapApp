@@ -95,7 +95,7 @@
                                         <barButtonItem key="rightBarButtonItem" title="投稿" id="zMW-cn-91j">
                                             <color key="tintColor" red="0.84705877299999999" green="0.44313728810000003" blue="0.2588235438" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
-                                                <action selector="postButtonTapped" destination="3cO-yY-hwY" id="Vqi-6k-kaJ"/>
+                                                <action selector="postButtonTapped" destination="3cO-yY-hwY" id="z36-T2-wQu"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>

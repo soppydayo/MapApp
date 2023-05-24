@@ -7,12 +7,12 @@
 
 import Foundation
 import RealmSwift
+import UIKit
 
 class PostData: Object {
-    
-    @Persisted var title: String = ""
-    @Persisted var text: String = ""
-    @Persisted var date: Date = Date()
-    
-  
+    @objc dynamic var title: String = ""
+    @objc dynamic var text: String = ""
+    @objc dynamic var date: Date = Date()
+    @objc dynamic var imageData: Data?
 }
+

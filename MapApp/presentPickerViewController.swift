@@ -17,6 +17,7 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
     @IBOutlet var HonbunText: UITextField!
     
     let realm = try! Realm()
+    var postData: PostData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,7 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         TitleText.delegate = self
         HonbunText.delegate = self
         
-
+        
         
         let postdata: PostData? = read()
         
@@ -39,39 +40,37 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         return realm.objects(PostData.self).first
     }
     
-    //Realm
-    @IBAction func postButtonTapped() {
-        let title: String = TitleText.text!
-        let text: String = HonbunText.text!
+    func createitem(item: PostData) {
+        try! realm.write{
+            realm.add(item)
+        }
         
-        let postdata: PostData? = read()
+    }
+    
+    @IBAction func postButtonTapped() {
+        let item = PostData()
         let currentDate = Date() // 現在の年月日を取得
         
-        if postdata != nil {
-            try! realm.write {
-                postdata!.title = title
-                postdata!.text = text
-                postdata!.date = currentDate // 現在の年月日を保存
-            }
-        } else {
-            let newpostdata = PostData()
-            newpostdata.title = title
-            newpostdata.text = text
-            newpostdata.date = currentDate // 現在の年月日を保存
-            
-            try! realm.write {
-                realm.add(newpostdata)
-            }
-            
+        item.title = TitleText.text ?? ""
+        item.text = HonbunText.text ?? ""
+        item.date = currentDate // 現在の年月日を保存
+        
+        if let image = photoImageView.image {
+            item.imageData = image.jpegData(compressionQuality: 0.8) // UIImageをDataに変換して保存
         }
+        
+        postData = item
+        saveData()
+        
         let alert: UIAlertController = UIAlertController(title: "成功", message: "保存しました", preferredStyle: .alert)
         alert.addAction(
             UIAlertAction(title: "OK", style: .default, handler:  nil)
         )
         
         present(alert, animated: true, completion: nil)
-        
     }
+
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -99,34 +98,45 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         
     }
     
+    
+    // 撮影が終わった時に呼ばれる
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        self.dismiss(animated: true, completion: nil)
-        
-        photoImageView.image = info[.originalImage] as? UIImage
+        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+        photoImageView.image = image
+        picker.dismiss(animated: true, completion: nil)
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
-    
-    
-    
-    
-    
+    func saveData() {
+        guard let postData = postData else {
+            return
+        }
+        
+        try! realm.write {
+            realm.add(postData)
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        /*
+         // MARK: - Navigation
+         
+         // In a storyboard-based application, you will often want to do a little preparation before navigation
+         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         // Get the new view controller using segue.destination.
+         // Pass the selected object to the new view controller.
+         }
+         */
+        
+        
+        
+        
+        
+        
+    }
 }

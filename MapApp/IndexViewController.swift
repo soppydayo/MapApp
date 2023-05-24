@@ -19,10 +19,15 @@ class IndexViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         
         tableView.dataSource = self
-        tableView.register(UINib(nibName: "ItemTableViewCell", bundle: nil), forCellReuseIdentifier: "ItemCell")
+        tableView.register(UINib(nibName: "ItemTableViewCell", bundle: nil), forCellReuseIdentifier: "itemCell")
         items = readItems()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        items = readItems()
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -35,9 +40,14 @@ class IndexViewController: UIViewController, UITableViewDataSource {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd"
         let dateString = dateFormatter.string(from: item.date)
-        cell.setCell(title: item.title, date: dateString)
+        if let imageData = item.imageData, let image = UIImage(data: imageData) {
+            cell.setCell(title: item.title, date: dateString, image: image)
+        } else {
+            cell.setCell(title: item.title, date: dateString, image: nil)
+        }
         return cell
     }
+
     
     func readItems() -> [PostData] {
         return Array(realm.objects(PostData.self))
