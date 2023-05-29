@@ -29,7 +29,8 @@ class IndexViewController: UIViewController, UITableViewDataSource {
         items = readItems()
         tableView.reloadData()
         
-        tableView.rowHeight = 170
+        tableView.rowHeight = 113
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -1,19 +1,18 @@
+
 //
-//  presentPickerViewController.swift
+//  pesentPickerViewController.swift
 //  MapApp
 //
 //  Created by 白川創大 on 2023/05/21.
 //
-
 import UIKit
 import RealmSwift
+import MapKit
 
-class presentPickerViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate{
+class presentPickerViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet var photoImageView: UIImageView!
-    
     @IBOutlet var TitleText: UITextField!
-    
     @IBOutlet var HonbunText: UITextField!
     
     let realm = try! Realm()
@@ -25,15 +24,10 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         TitleText.delegate = self
         HonbunText.delegate = self
         
-        
-        
         let postdata: PostData? = read()
         
         TitleText.text = postdata?.title
         HonbunText.text = postdata?.text
-        
-        
-        // Do any additional setup after loading the view.
     }
     
     func read() -> PostData? {
@@ -41,10 +35,9 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
     }
     
     func createitem(item: PostData) {
-        try! realm.write{
+        try! realm.write {
             realm.add(item)
         }
-        
     }
     
     @IBAction func postButtonTapped() {
@@ -63,41 +56,36 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         saveData()
         
         let alert: UIAlertController = UIAlertController(title: "成功", message: "保存しました", preferredStyle: .alert)
-        alert.addAction(
-            UIAlertAction(title: "OK", style: .default, handler:  nil)
-        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         
         present(alert, animated: true, completion: nil)
-    }
+        
+        TitleText.text = ""
+        HonbunText.text = ""
+        
 
-    
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
     }
-    
-    
-    
-    
     
     //カメラボタンを起動する
     @IBAction func cameraButtonTapped() {
         presentPickerController(sourceType: .camera)
     }
     
-    
     func presentPickerController(sourceType: UIImagePickerController.SourceType) {
         if UIImagePickerController.isSourceTypeAvailable(sourceType) {
             let picker = UIImagePickerController()
             picker.sourceType = sourceType
             picker.delegate = self
-            self.present(picker, animated: true, completion: nil)
-            
-            
+            present(picker, animated: true, completion: nil)
         }
-        
     }
     
+
     
     // 撮影が終わった時に呼ばれる
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -114,29 +102,5 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         try! realm.write {
             realm.add(postData)
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        /*
-         // MARK: - Navigation
-         
-         // In a storyboard-based application, you will often want to do a little preparation before navigation
-         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-         }
-         */
-        
-        
-        
-        
-        
-        
     }
 }

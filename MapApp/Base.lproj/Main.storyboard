@@ -27,6 +27,7 @@
                         <color key="backgroundColor" red="0.94117647410000005" green="0.88235294819999999" blue="0.86274516580000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="HOME" image="house" catalog="system" id="G83-HG-a3c"/>
+                    <navigationItem key="navigationItem" id="wS0-bL-qaM"/>
                     <connections>
                         <outlet property="mapView" destination="6ga-no-7du" id="13e-zz-qZC"/>
                     </connections>
@@ -72,7 +73,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hwo-TT-PTE">
                                 <rect key="frame" x="0.0" y="59" width="393" height="0.0"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="タイトルを入力..." borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LU2-Mx-AnZ">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="タイトルを入力..." borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="LU2-Mx-AnZ">
                                 <rect key="frame" x="42" y="592" width="150" height="34"/>
                                 <color key="textColor" systemColor="tertiaryLabelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -113,7 +114,7 @@
                                     </textAttributes>
                                 </navigationBarAppearance>
                             </navigationBar>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="top" text="本文を入力..." borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nZB-IL-VbG">
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="top" text="本文を入力..." borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="nZB-IL-VbG">
                                 <rect key="frame" x="42" y="634" width="309" height="115"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="115" id="VLI-XH-PYl"/>
@@ -154,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oub-QF-9xJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="646.56488549618314" y="607.04225352112678"/>
+            <point key="canvasLocation" x="-1102" y="738"/>
         </scene>
         <!--QUEST-->
         <scene sceneID="YLI-jO-sUT">
