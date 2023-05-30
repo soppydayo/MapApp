@@ -27,6 +27,8 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+       
+        
         TitleText.delegate = self
         HonbunText.delegate = self
         
@@ -39,7 +41,24 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
+        
+        
     }
+    func addPinToHomeViewController() {
+           guard let currentLocation = locationManager.location else {
+               return
+           }
+           
+           let homeViewController = navigationController?.viewControllers.first(where: { $0 is HomeViewController }) as? HomeViewController
+           let annotation = MKPointAnnotation()
+           annotation.coordinate = currentLocation.coordinate
+           homeViewController?.mapView.addAnnotation(annotation)
+           
+           // ホーム画面の地図を表示する範囲を更新
+           let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+           let region = MKCoordinateRegion(center: currentLocation.coordinate, span: span)
+           homeViewController?.mapView.region = region
+       }
     
     func read() -> PostData? {
         return realm.objects(PostData.self).first
@@ -74,8 +93,6 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
             return
         }
         
-
-        
         
         let currentLocation = locationManager.location
         let item = PostData()
@@ -103,6 +120,10 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         
         TitleText.text = ""
         HonbunText.text = ""
+        
+        photoImageView.image = defaultImage
+        
+        addPinToHomeViewController()
 
         
     }

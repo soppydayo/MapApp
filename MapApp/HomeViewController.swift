@@ -5,10 +5,11 @@ import CoreLocation
 class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     var locationManager: CLLocationManager!
+    var isMapDelegateSet = false // mapViewのdelegate設定のフラグ
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // ロケーションマネージャーの初期化と設定
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -16,8 +17,27 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         // ユーザーからの位置情報の利用許可を要求
         locationManager.requestWhenInUseAuthorization()
         
-        mapView.delegate = self
+        mapView.showsUserLocation = true // 現在位置を表示する設定
+        
+        //mapView.delegate = self
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // mapViewのdelegateを設定
+        mapView.delegate = self
+        isMapDelegateSet = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // mapViewのdelegateを解除
+        mapView.delegate = nil
+        isMapDelegateSet = false
+    }
+    
     
     // 位置情報の利用許可が変更された時に呼ばれるメソッド
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
@@ -34,19 +54,24 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         if let location = locations.last {
             let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             let region = MKCoordinateRegion(center: location.coordinate, span: span)
-            mapView.region = region  // 地図の表示領域を更新
+            
+            // mapViewのdelegateが設定されている場合のみ地図の表示領域を更新
+            if isMapDelegateSet {
+                mapView.region = region
+            }
         }
     }
+
     
     
     func presentPickerViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let pickerViewController = storyboard.instantiateViewController(withIdentifier: "presentPickerViewController") as! presentPickerViewController
         
-
+        
         navigationController?.pushViewController(pickerViewController, animated: true)
     }
-
     
-
+    
+    
 }
