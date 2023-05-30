@@ -8,15 +8,21 @@
 import UIKit
 import RealmSwift
 import MapKit
+import CoreLocation
 
-class presentPickerViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
+class presentPickerViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, CLLocationManagerDelegate {
     
     @IBOutlet var photoImageView: UIImageView!
     @IBOutlet var TitleText: UITextField!
     @IBOutlet var HonbunText: UITextField!
     
+    let locationManager = CLLocationManager()
+    
     let realm = try! Realm()
     var postData: PostData?
+    
+    let defaultImage = UIImage(named: "defaultImage")
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +34,11 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         
         TitleText.text = postdata?.title
         HonbunText.text = postdata?.text
+        
+        // 位置情報の利用許可をリクエスト
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+        
     }
     
     func read() -> PostData? {
@@ -40,13 +51,43 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         }
     }
     
+    func generateID() -> String {
+        let id = UUID().uuidString // ランダムなUUIDを生成
+        return id
+    }
+    
     @IBAction func postButtonTapped() {
+        
+        // 入力チェック
+        guard photoImageView.image != nil else {
+            displayAlert(message: "写真を撮影してください")
+            return
+        }
+        
+        guard let title = TitleText.text, !title.isEmpty else {
+            displayAlert(message: "タイトルを入力してください")
+            return
+        }
+        
+        guard let honbun = HonbunText.text, !honbun.isEmpty else {
+            displayAlert(message: "本文を入力してください")
+            return
+        }
+        
+
+        
+        
+        let currentLocation = locationManager.location
         let item = PostData()
         let currentDate = Date() // 現在の年月日を取得
         
         item.title = TitleText.text ?? ""
         item.text = HonbunText.text ?? ""
         item.date = currentDate // 現在の年月日を保存
+        item.id = generateID() // IDを生成して保存
+        item.longitude = currentLocation!.coordinate.longitude // 経度を保存
+        item.latitude = currentLocation!.coordinate.latitude // 緯度を保存
+        
         
         if let image = photoImageView.image {
             item.imageData = image.jpegData(compressionQuality: 0.8) // UIImageをDataに変換して保存
@@ -62,8 +103,14 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         
         TitleText.text = ""
         HonbunText.text = ""
-        
 
+        
+    }
+    
+    func displayAlert(message: String) {
+        let alert = UIAlertController(title: "入力エラー", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -85,7 +132,7 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         }
     }
     
-
+    
     
     // 撮影が終わった時に呼ばれる
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -103,4 +150,14 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
             realm.add(postData)
         }
     }
+    
+    // 位置情報の利用許可状態が変更された時に呼ばれる
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            // 位置情報の取得を開始
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    
 }

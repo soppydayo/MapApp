@@ -34,8 +34,8 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="本文を入力" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaF-HG-0Ik">
-                        <rect key="frame" x="134" y="22" width="235" height="68"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本文を入力" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaF-HG-0Ik">
+                        <rect key="frame" x="134" y="-36" width="235" height="185"/>
                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="37"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                     <constraint firstItem="iNg-kr-JFd" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="4dv-Jz-fil"/>
                     <constraint firstItem="FaF-HG-0Ik" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5KC-FV-zu4"/>
                     <constraint firstItem="FaF-HG-0Ik" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="HL9-JC-lEw"/>
-                    <constraint firstItem="FaF-HG-0Ik" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-48" id="Kzz-Mj-yMH"/>
+                    <constraint firstItem="FaF-HG-0Ik" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-47" id="Kzz-Mj-yMH"/>
                     <constraint firstItem="FaF-HG-0Ik" firstAttribute="leading" secondItem="2Fd-1h-7TV" secondAttribute="trailing" constant="27" id="PSQ-QG-kHe"/>
                     <constraint firstAttribute="bottomMargin" secondItem="iNg-kr-JFd" secondAttribute="bottom" constant="-22" id="Z0M-Ae-smW"/>
                     <constraint firstItem="iNg-kr-JFd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="j6Z-nv-rWV"/>

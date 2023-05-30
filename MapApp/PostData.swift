@@ -14,5 +14,9 @@ class PostData: Object {
     @objc dynamic var text: String = ""
     @objc dynamic var date: Date = Date()
     @objc dynamic var imageData: Data?
+    @objc dynamic var id: String = ""
+    @objc dynamic var latitude: Double = 0.0
+    @objc dynamic var longitude: Double = 0.0
+    
 }
 
