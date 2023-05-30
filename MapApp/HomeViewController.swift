@@ -6,6 +6,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     @IBOutlet weak var mapView: MKMapView!
     var locationManager: CLLocationManager!
     var isMapDelegateSet = false // mapViewのdelegate設定のフラグ
+    var isFirstLoad = true // 画面が初回ロードされたかのフラグ
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,8 +19,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         locationManager.requestWhenInUseAuthorization()
         
         mapView.showsUserLocation = true // 現在位置を表示する設定
-        
-        //mapView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,6 +27,12 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         // mapViewのdelegateを設定
         mapView.delegate = self
         isMapDelegateSet = true
+        
+        // 初回ロード時にのみ地図の表示領域を更新
+        if isFirstLoad {
+            locationManager.startUpdatingLocation()
+            isFirstLoad = false
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -58,6 +63,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
             // mapViewのdelegateが設定されている場合のみ地図の表示領域を更新
             if isMapDelegateSet {
                 mapView.region = region
+                locationManager.stopUpdatingLocation() // 初回ロード時に位置情報の更新を停止
             }
         }
     }
@@ -71,7 +77,4 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         
         navigationController?.pushViewController(pickerViewController, animated: true)
     }
-    
-    
-    
 }
