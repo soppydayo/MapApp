@@ -29,10 +29,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         mapView.delegate = self
         isMapDelegateSet = true
         
-        // 初回ロード時にのみ地図の表示領域を更新
-        if isFirstLoad {
             locationManager.startUpdatingLocation()
-            isFirstLoad = false
             
             // ピンを表示する前に既存のピンを削除する
             mapView.removeAnnotations(mapView.annotations)
@@ -46,7 +43,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
                 annotation.coordinate = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
                 mapView.addAnnotation(annotation)
             }
-        }
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
