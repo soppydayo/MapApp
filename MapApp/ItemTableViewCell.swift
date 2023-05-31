@@ -12,6 +12,11 @@ class ItemTableViewCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var postImageView: UIImageView!
+    @IBOutlet var longitudeLabel: UILabel!
+    @IBOutlet var idLabel: UILabel!
+    
+    
+    
     
 
     override func awakeFromNib() {

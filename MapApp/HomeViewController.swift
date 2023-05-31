@@ -1,6 +1,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import RealmSwift
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
@@ -32,6 +33,19 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         if isFirstLoad {
             locationManager.startUpdatingLocation()
             isFirstLoad = false
+            
+            // ピンを表示する前に既存のピンを削除する
+            mapView.removeAnnotations(mapView.annotations)
+            
+            // Realmからデータを取得してピンを表示する
+            let realm = try! Realm()
+            let items = realm.objects(PostData.self)
+            
+            for item in items {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
+                mapView.addAnnotation(annotation)
+            }
         }
     }
     
@@ -42,6 +56,26 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         mapView.delegate = nil
         isMapDelegateSet = false
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            // 現在位置のピンはデフォルトのビューを使用する
+            return nil
+        }
+        
+        let identifier = "PinAnnotation"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
+        
+        if annotationView == nil {
+            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView?.canShowCallout = true
+        } else {
+            annotationView?.annotation = annotation
+        }
+        
+        return annotationView
+    }
+
     
     
     // 位置情報の利用許可が変更された時に呼ばれるメソッド

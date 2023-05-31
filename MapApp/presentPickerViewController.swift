@@ -41,6 +41,9 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
+        TitleText.text = ""
+        HonbunText.text = ""
+        
         
         
     }
