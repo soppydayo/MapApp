@@ -77,4 +77,20 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         
         navigationController?.pushViewController(pickerViewController, animated: true)
     }
+    
+    func addPinToMap(with location: CLLocation?) {
+        guard let location = location else {
+            return
+        }
+
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = location.coordinate
+        mapView.addAnnotation(annotation)
+
+        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
+        mapView.setRegion(region, animated: true)
+    }
+
+
 }

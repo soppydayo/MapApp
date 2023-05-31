@@ -44,21 +44,8 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
         
         
     }
-    func addPinToHomeViewController() {
-           guard let currentLocation = locationManager.location else {
-               return
-           }
-           
-           let homeViewController = navigationController?.viewControllers.first(where: { $0 is HomeViewController }) as? HomeViewController
-           let annotation = MKPointAnnotation()
-           annotation.coordinate = currentLocation.coordinate
-           homeViewController?.mapView.addAnnotation(annotation)
-           
-           // ホーム画面の地図を表示する範囲を更新
-           let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-           let region = MKCoordinateRegion(center: currentLocation.coordinate, span: span)
-           homeViewController?.mapView.region = region
-       }
+    
+
     
     func read() -> PostData? {
         return realm.objects(PostData.self).first
@@ -76,57 +63,59 @@ class presentPickerViewController: UIViewController, UINavigationControllerDeleg
     }
     
     @IBAction func postButtonTapped() {
-        
         // 入力チェック
         guard photoImageView.image != nil else {
             displayAlert(message: "写真を撮影してください")
             return
         }
-        
+
         guard let title = TitleText.text, !title.isEmpty else {
             displayAlert(message: "タイトルを入力してください")
             return
         }
-        
+
         guard let honbun = HonbunText.text, !honbun.isEmpty else {
             displayAlert(message: "本文を入力してください")
             return
         }
-        
-        
+
         let currentLocation = locationManager.location
         let item = PostData()
         let currentDate = Date() // 現在の年月日を取得
-        
+
         item.title = TitleText.text ?? ""
         item.text = HonbunText.text ?? ""
         item.date = currentDate // 現在の年月日を保存
         item.id = generateID() // IDを生成して保存
-        item.longitude = currentLocation!.coordinate.longitude // 経度を保存
-        item.latitude = currentLocation!.coordinate.latitude // 緯度を保存
-        
-        
+        item.longitude = currentLocation?.coordinate.longitude ?? 0.0 // 経度を保存
+        item.latitude = currentLocation?.coordinate.latitude ?? 0.0 // 緯度を保存
+
         if let image = photoImageView.image {
             item.imageData = image.jpegData(compressionQuality: 0.8) // UIImageをDataに変換して保存
         }
-        
+
         postData = item
         saveData()
-        
+
         let alert: UIAlertController = UIAlertController(title: "成功", message: "保存しました", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        
+
         present(alert, animated: true, completion: nil)
-        
+
         TitleText.text = ""
         HonbunText.text = ""
-        
-        photoImageView.image = defaultImage
-        
-        addPinToHomeViewController()
 
-        
+        photoImageView.image = defaultImage
+
+        guard let homeViewController = navigationController?.viewControllers.first(where: { $0 is HomeViewController }) as? HomeViewController else {
+            return
+        }
+
+        homeViewController.addPinToMap(with: currentLocation)
+
+        navigationController?.popViewController(animated: true)
     }
+    
     
     func displayAlert(message: String) {
         let alert = UIAlertController(title: "入力エラー", message: message, preferredStyle: .alert)
