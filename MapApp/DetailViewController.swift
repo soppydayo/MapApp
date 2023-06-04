@@ -2,7 +2,7 @@
 //  DetailViewController.swift
 //  MapApp
 //
-//  Created by 白川創大 on 2023/05/21.
+//  Created by 白川創大 on 2023/06/04.
 //
 
 import UIKit

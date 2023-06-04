@@ -14,7 +14,6 @@
 		706797D52A19F1D3002A7235 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 706797D42A19F1D3002A7235 /* Assets.xcassets */; };
 		706797D82A19F1D3002A7235 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 706797D62A19F1D3002A7235 /* LaunchScreen.storyboard */; };
 		706797E02A1A65BD002A7235 /* presentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706797DF2A1A65BD002A7235 /* presentPickerViewController.swift */; };
-		706797E42A1A66C2002A7235 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706797E32A1A66C2002A7235 /* DetailViewController.swift */; };
 		706797E62A1A66D4002A7235 /* IndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706797E52A1A66D4002A7235 /* IndexViewController.swift */; };
 		706797E82A1A66EA002A7235 /* QuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 706797E72A1A66EA002A7235 /* QuestViewController.swift */; };
 		706797EB2A1C54EC002A7235 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 706797EA2A1C54EC002A7235 /* Realm */; };
@@ -34,6 +33,8 @@
 		7067980C2A1DA4E8002A7235 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 706798002A1DA4E8002A7235 /* Roboto-Bold.ttf */; };
 		7067980D2A1DA4E8002A7235 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 706798012A1DA4E8002A7235 /* Roboto-BoldItalic.ttf */; };
 		7067980E2A1DA4E8002A7235 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 706798022A1DA4E8002A7235 /* Roboto-Light.ttf */; };
+		70D42BA32A2C518000B2B87C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D42BA22A2C518000B2B87C /* DetailViewController.swift */; };
+		70D42BA52A2C6C5100B2B87C /* SubModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D42BA42A2C6C5100B2B87C /* SubModalViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +47,6 @@
 		706797D72A19F1D3002A7235 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		706797D92A19F1D3002A7235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		706797DF2A1A65BD002A7235 /* presentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = presentPickerViewController.swift; sourceTree = "<group>"; };
-		706797E32A1A66C2002A7235 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		706797E52A1A66D4002A7235 /* IndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexViewController.swift; sourceTree = "<group>"; };
 		706797E72A1A66EA002A7235 /* QuestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestViewController.swift; sourceTree = "<group>"; };
 		706797F02A1C90F1002A7235 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
@@ -64,6 +64,8 @@
 		706798002A1DA4E8002A7235 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		706798012A1DA4E8002A7235 /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
 		706798022A1DA4E8002A7235 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		70D42BA22A2C518000B2B87C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		70D42BA42A2C6C5100B2B87C /* SubModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubModalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,9 +106,10 @@
 				706797CF2A19F1D1002A7235 /* HomeViewController.swift */,
 				706797DF2A1A65BD002A7235 /* presentPickerViewController.swift */,
 				706797E52A1A66D4002A7235 /* IndexViewController.swift */,
-				706797E32A1A66C2002A7235 /* DetailViewController.swift */,
+				70D42BA42A2C6C5100B2B87C /* SubModalViewController.swift */,
 				706797E72A1A66EA002A7235 /* QuestViewController.swift */,
 				706797F02A1C90F1002A7235 /* PostData.swift */,
+				70D42BA22A2C518000B2B87C /* DetailViewController.swift */,
 				706797D12A19F1D1002A7235 /* Main.storyboard */,
 				706797D42A19F1D3002A7235 /* Assets.xcassets */,
 				706797D62A19F1D3002A7235 /* LaunchScreen.storyboard */,
@@ -227,12 +230,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70D42BA32A2C518000B2B87C /* DetailViewController.swift in Sources */,
 				706797D02A19F1D1002A7235 /* HomeViewController.swift in Sources */,
 				706797F42A1D9F2D002A7235 /* ItemTableViewCell.swift in Sources */,
 				706797F12A1C90F1002A7235 /* PostData.swift in Sources */,
 				706797CC2A19F1D1002A7235 /* AppDelegate.swift in Sources */,
+				70D42BA52A2C6C5100B2B87C /* SubModalViewController.swift in Sources */,
 				706797E02A1A65BD002A7235 /* presentPickerViewController.swift in Sources */,
-				706797E42A1A66C2002A7235 /* DetailViewController.swift in Sources */,
 				706797E82A1A66EA002A7235 /* QuestViewController.swift in Sources */,
 				706797E62A1A66D4002A7235 /* IndexViewController.swift in Sources */,
 				706797CE2A19F1D1002A7235 /* SceneDelegate.swift in Sources */,

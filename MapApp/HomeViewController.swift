@@ -11,7 +11,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // ロケーションマネージャーの初期化と設定
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -29,20 +29,20 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         mapView.delegate = self
         isMapDelegateSet = true
         
-            locationManager.startUpdatingLocation()
-            
-            // ピンを表示する前に既存のピンを削除する
-            mapView.removeAnnotations(mapView.annotations)
-            
-            // Realmからデータを取得してピンを表示する
-            let realm = try! Realm()
-            let items = realm.objects(PostData.self)
-            
-            for item in items {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
-                mapView.addAnnotation(annotation)
-            }
+        locationManager.startUpdatingLocation()
+        
+        // ピンを表示する前に既存のピンを削除する
+        mapView.removeAnnotations(mapView.annotations)
+        
+        // Realmからデータを取得してピンを表示する
+        let realm = try! Realm()
+        let items = realm.objects(PostData.self)
+        
+        for item in items {
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2D(latitude: item.latitude, longitude: item.longitude)
+            mapView.addAnnotation(annotation)
+        }
         
     }
     
@@ -66,62 +66,85 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         if annotationView == nil {
             annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
-        } else {
-            annotationView?.annotation = annotation
-        }
-        
-        return annotationView
-    }
-
-    
-    
-    // 位置情報の利用許可が変更された時に呼ばれるメソッド
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        switch status {
-        case .authorizedAlways, .authorizedWhenInUse:
-            manager.startUpdatingLocation()  // 位置情報の更新を開始
-        default:
-            break
-        }
-    }
-    
-    // 位置情報が更新された時に呼ばれるメソッド
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last {
-            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-            let region = MKCoordinateRegion(center: location.coordinate, span: span)
             
-            // mapViewのdelegateが設定されている場合のみ地図の表示領域を更新
-            if isMapDelegateSet {
-                mapView.region = region
-                locationManager.stopUpdatingLocation() // 初回ロード時に位置情報の更新を停止
+        }
+            return annotationView
+    }
+        
+        
+        
+        
+        // 位置情報の利用許可が変更された時に呼ばれるメソッド
+        func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+            switch status {
+            case .authorizedAlways, .authorizedWhenInUse:
+                manager.startUpdatingLocation()  // 位置情報の更新を開始
+            default:
+                break
             }
         }
-    }
-
-    
-    
-    func presentPickerViewController() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let pickerViewController = storyboard.instantiateViewController(withIdentifier: "presentPickerViewController") as! presentPickerViewController
+        
+        // 位置情報が更新された時に呼ばれるメソッド
+        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            if let location = locations.last {
+                let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                let region = MKCoordinateRegion(center: location.coordinate, span: span)
+                
+                // mapViewのdelegateが設定されている場合のみ地図の表示領域を更新
+                if isMapDelegateSet {
+                    mapView.region = region
+                    locationManager.stopUpdatingLocation() // 初回ロード時に位置情報の更新を停止
+                }
+            }
+        }
         
         
-        navigationController?.pushViewController(pickerViewController, animated: true)
-    }
+        
+        func presentPickerViewController() {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let pickerViewController = storyboard.instantiateViewController(withIdentifier: "presentPickerViewController") as! presentPickerViewController
+            
+            
+            navigationController?.pushViewController(pickerViewController, animated: true)
+        }
+        
+        func addPinToMap(with location: CLLocation?) {
+            guard let location = location else {
+                return
+            }
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = location.coordinate
+            mapView.addAnnotation(annotation)
+            
+            let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            let region = MKCoordinateRegion(center: location.coordinate, span: span)
+            mapView.setRegion(region, animated: true)
+        }
     
-    func addPinToMap(with location: CLLocation?) {
-        guard let location = location else {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        // タップされたアノテーションの情報を取得
+        guard let annotation = view.annotation else {
             return
         }
-
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = location.coordinate
-        mapView.addAnnotation(annotation)
-
-        let span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        let region = MKCoordinateRegion(center: location.coordinate, span: span)
-        mapView.setRegion(region, animated: true)
+        
+        // セミモーダルを表示する処理を実装
+        showDetails(for: annotation)
+        // 例えば、選択されたアノテーションに関連する情報を表示するセミモーダルを表示するコードを追加します
     }
 
+    func showDetails(for annotation: MKAnnotation) {
+        // 選択されたアノテーションに関連する情報を取得
+        // 例えば、Realmからデータを取得するなどの処理を行います
 
-}
+        // セミモーダルのコンテンツを設定
+        let subModalViewController = SubModalViewController()
+        // セミモーダルを表示
+        present(subModalViewController, animated: true, completion: nil)
+    }
+
+        
+        
+        
+        
+    }
