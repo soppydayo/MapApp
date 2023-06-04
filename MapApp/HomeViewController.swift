@@ -9,6 +9,28 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     var isMapDelegateSet = false // mapViewのdelegate設定のフラグ
     var isFirstLoad = true // 画面が初回ロードされたかのフラグ
     
+    
+    // ピンがタップ
+        func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+            performSegue(withIdentifier: "toDetail", sender: nil)
+        }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetail" {
+            let next = segue.destination
+            if let sheet = next.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.largestUndimmedDetentIdentifier = .medium
+                sheet.preferredCornerRadius = 40.0
+                sheet.prefersGrabberVisible = true
+            }
+            
+                }
+                
+            }
+        
+                
+                
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -56,24 +78,19 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
-            // 現在位置のピンはデフォルトのビューを使用する
-            return nil
+          // 現在位置のピンはデフォルトのビューを使用する
+          return nil
         }
-        
         let identifier = "PinAnnotation"
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKMarkerAnnotationView
-        
         if annotationView == nil {
-            annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView?.canShowCallout = true
-            
+          annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+          annotationView?.canShowCallout = true
         }
-            return annotationView
-    }
-        
-        
-        
-        
+          return annotationView
+      }
+
+
         // 位置情報の利用許可が変更された時に呼ばれるメソッド
         func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
             switch status {
@@ -121,28 +138,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
             let region = MKCoordinateRegion(center: location.coordinate, span: span)
             mapView.setRegion(region, animated: true)
         }
-    
-    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        // タップされたアノテーションの情報を取得
-        guard let annotation = view.annotation else {
-            return
-        }
-        
-        // セミモーダルを表示する処理を実装
-        showDetails(for: annotation)
-        // 例えば、選択されたアノテーションに関連する情報を表示するセミモーダルを表示するコードを追加します
-    }
-
-    func showDetails(for annotation: MKAnnotation) {
-        // 選択されたアノテーションに関連する情報を取得
-        // 例えば、Realmからデータを取得するなどの処理を行います
-
-        // セミモーダルのコンテンツを設定
-        let subModalViewController = SubModalViewController()
-        // セミモーダルを表示
-        present(subModalViewController, animated: true, completion: nil)
-    }
-
         
         
         

@@ -9,6 +9,28 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Half Modal View Controller-->
+        <scene sceneID="3RT-uk-7jR">
+            <objects>
+                <viewController id="IOM-BS-tsR" customClass="HalfModalViewController" customModule="MapApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Z3-fa-XOw">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OEa-ik-ZT1">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="526"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pSA-c0-Hmv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="IFq-OY-wZN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8QJ-5P-sDG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1663.3587786259541" y="1800.7042253521129"/>
+        </scene>
         <!--HOME-->
         <scene sceneID="6AW-DN-oY8">
             <objects>
@@ -30,11 +52,12 @@
                     <navigationItem key="navigationItem" id="wS0-bL-qaM"/>
                     <connections>
                         <outlet property="mapView" destination="6ga-no-7du" id="vQi-Ug-EBk"/>
+                        <segue destination="IOM-BS-tsR" kind="show" identifier="toDetail" id="9df-EQ-bGI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEV-LS-tup" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1471" y="2390"/>
+            <point key="canvasLocation" x="-912" y="1801"/>
         </scene>
         <!--INDEX-->
         <scene sceneID="qST-ja-2Lq">
@@ -250,6 +273,9 @@
         <image name="folder" catalog="system" width="128" height="96"/>
         <image name="house" catalog="system" width="128" height="104"/>
         <image name="list.bullet.clipboard" catalog="system" width="103" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="tintColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

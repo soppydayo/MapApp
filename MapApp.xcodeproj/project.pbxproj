@@ -34,7 +34,7 @@
 		7067980D2A1DA4E8002A7235 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 706798012A1DA4E8002A7235 /* Roboto-BoldItalic.ttf */; };
 		7067980E2A1DA4E8002A7235 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 706798022A1DA4E8002A7235 /* Roboto-Light.ttf */; };
 		70D42BA32A2C518000B2B87C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D42BA22A2C518000B2B87C /* DetailViewController.swift */; };
-		70D42BA52A2C6C5100B2B87C /* SubModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D42BA42A2C6C5100B2B87C /* SubModalViewController.swift */; };
+		70D42BA72A2C7B0D00B2B87C /* HalfModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D42BA62A2C7B0D00B2B87C /* HalfModalViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,7 +65,7 @@
 		706798012A1DA4E8002A7235 /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
 		706798022A1DA4E8002A7235 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		70D42BA22A2C518000B2B87C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		70D42BA42A2C6C5100B2B87C /* SubModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubModalViewController.swift; sourceTree = "<group>"; };
+		70D42BA62A2C7B0D00B2B87C /* HalfModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfModalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +106,6 @@
 				706797CF2A19F1D1002A7235 /* HomeViewController.swift */,
 				706797DF2A1A65BD002A7235 /* presentPickerViewController.swift */,
 				706797E52A1A66D4002A7235 /* IndexViewController.swift */,
-				70D42BA42A2C6C5100B2B87C /* SubModalViewController.swift */,
 				706797E72A1A66EA002A7235 /* QuestViewController.swift */,
 				706797F02A1C90F1002A7235 /* PostData.swift */,
 				70D42BA22A2C518000B2B87C /* DetailViewController.swift */,
@@ -116,6 +115,7 @@
 				706797D92A19F1D3002A7235 /* Info.plist */,
 				706797F22A1D9F2D002A7235 /* ItemTableViewCell.swift */,
 				706797F32A1D9F2D002A7235 /* ItemTableViewCell.xib */,
+				70D42BA62A2C7B0D00B2B87C /* HalfModalViewController.swift */,
 			);
 			path = MapApp;
 			sourceTree = "<group>";
@@ -235,7 +235,7 @@
 				706797F42A1D9F2D002A7235 /* ItemTableViewCell.swift in Sources */,
 				706797F12A1C90F1002A7235 /* PostData.swift in Sources */,
 				706797CC2A19F1D1002A7235 /* AppDelegate.swift in Sources */,
-				70D42BA52A2C6C5100B2B87C /* SubModalViewController.swift in Sources */,
+				70D42BA72A2C7B0D00B2B87C /* HalfModalViewController.swift in Sources */,
 				706797E02A1A65BD002A7235 /* presentPickerViewController.swift in Sources */,
 				706797E82A1A66EA002A7235 /* QuestViewController.swift in Sources */,
 				706797E62A1A66D4002A7235 /* IndexViewController.swift in Sources */,
